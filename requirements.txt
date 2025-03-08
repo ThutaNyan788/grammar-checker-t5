@@ -3,3 +3,4 @@ torch
 transformers
 happytransformer
 huggingface_hub
+textblob

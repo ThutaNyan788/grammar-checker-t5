@@ -1,5 +1,6 @@
 import asyncio
 import streamlit as st
+from textblob import TextBlob
 from happytransformer import HappyTextToText, TTSettings
 
 # Fix event loop issue
@@ -20,6 +21,11 @@ st.write("Enter a sentence with incorrect grammar, and I will correct it!")
 sentence = st.text_input("Enter a sentence:", "My cat have claws")
 
 if st.button("Correct Grammar"):
+
     input_text = "grammar: " + sentence
     result = happy_tt.generate_text(input_text, args=beam_settings)
-    st.write("✅ Corrected Sentence:", result.text)
+
+    b = TextBlob(result.text)
+    spell_check_text = b.correct()
+
+    st.write("✅ Corrected Sentence:", spell_check_text)
